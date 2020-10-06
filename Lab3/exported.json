@@ -1,0 +1,6 @@
+{"_id":{"$oid":"5f7c07e10951dec2b4f18bfd"},"name":"Kedar","age":20.0,"rollno":"1BM17CS041","contact":9.876543578E+09,"emailid":"kedar@bmsce.ac.in"} 
+{"_id":{"$oid":"5f7c07ff0951dec2b4f18bfe"},"name":"Abhilash","age":20.0,"rollno":"1BM17CS003","contact":8.976524356E+09,"emailid":"abhi@bmsce.ac.in"}
+{"_id":{"$oid":"5f7c08210951dec2b4f18bff"},"name":"Kratharth","age":21.0,"rollno":"1BM17CS035","contact":8.970044359E+09,"emailid":"kratharth@bmsce.ac.in"}
+{"_id":{"$oid":"5f7c08c40951dec2b4f18c01"},"name":"Bhoomika","age":20.0,"rollno":"1BM17CS045","contact":8.724016459E+09,"emailid":"bhoomika@bmsce.ac.in"}
+{"_id":{"$oid":"5f7c0a4951c85ca7a254813a"},"name":"Shrivatsa","age":21.0,"rollno":"1BM17CS010","contact":8.763240344E+09,"emailid":"vatsa.me@gmail.com"}
+{"_id":{"$oid":"5f7c101751c85ca7a254813d"},"name":"FEM","age":21.0,"rollno":"1BM17CS042","contact":9.663240328E+09,"emailid":"krishna@bmsce.ac.in"}
