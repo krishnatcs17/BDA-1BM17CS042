@@ -1,0 +1,26 @@
+1. Create  a keyspace by name Student:
+
+> CREATE KEYSPACE Student with replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+2. Create a column family by name StudentInfo with attributes USN Primary Key, Stude_Name, Date_of_Birth, Mobile_Number, Semester, Dept_Name:
+
+> CREATE COLUMNFAMILY StudentInfo(
+   USN int primary key,
+   StudentName text,
+   DOB text,
+   MobileNo int,
+   Department text,
+   Sem int
+  );
+  
+3. Insert the values into the table in batch:
+
+> BEGIN BATCH
+    INSERT INTO StudentInfo(USN, Department, DOB, MobileNo, Sem, StudentName) VALUES(121,'CSE', '17-10-1999', 91265, 7, 'Kedar');
+    INSERT INTO StudentInfo(USN, Department, DOB, MobileNo, Sem, StudentName) VALUES(132, 'ECE', '13-11-1999', 9357847, 6, 'Kratharth');
+    INSERT INTO StudentInfo(USN, Department, DOB, MobileNo, Sem, StudentName) VALUES(142, 'ECE', '30-01-1999', 954671, 6, 'Abhilash');
+    APPLY BATCH;
+	
+4. Update Student name of USN 121:
+
+> UPDATE StudentInfo set StudentName = 'Kusuma' where USN = 121;
