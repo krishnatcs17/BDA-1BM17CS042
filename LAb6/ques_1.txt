@@ -1,0 +1,39 @@
+1. Create  a keyspace by name Employee
+> CREATE KEYSPACE Employee with replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+2. Create a column family by name Employee-Info with attributes 
+    Emp_Id Primary Key, Emp_Name, Designation, Date_of_Joining, Salary,   
+    Dept_Name
+> 	CREATE COLUMNFAMILY Employee_Info(
+	   Emp_Id int primary key,
+	   Emp_Name text,
+	   Date_of_Joining date,
+	   Designation text,
+	   Dept_Name text,
+	   Salary int
+	);
+
+3. Insert the values into the table in batch
+> 	BEGIN BATCH
+	Insert into Employee_Info(employee_id, date_of_joining, dept_name, designstion, emp_name, salary) VALUES(121, '2020-10-11', 'Backend', 'Associate Softare Engg', 'Krishna', 72000);
+	Insert into Employee_Info(employee_id, date_of_joining, dept_name, designstion, emp_name, salary) VALUES(133, '2019-11-22', 'Development', 'Softare Engg', 'Kedar', 81000);
+	Insert into Employee_Info(employee_id, date_of_joining, dept_name, designstion, emp_name, salary) VALUES(192, '2019-04-12', 'Development', 'Software Developer', 'Kratharth', 75000);
+	APPLY BATCH;
+
+4. Update Employee name and Department of Emp-Id 121
+>	Update Employee_Info SET emp_name= 'Krishna T', dept_name = 'Front End' WHERE employee_id=121;
+
+5. Sort the details of Employee records based on salary
+>
+
+6. Alter the schema of the table Employee_Info to add a column Projects which stores a set of Projects done by the corresponding Employee.
+>	ALTER TABLE Employee_Info ADD projects set<text>;
+
+7. Update the altered table to add project names.
+>	Update Employee_Info set projects = projects + {'BDF', 'proctor system'} where employee_id=121;
+> 	Update Employee_Info set projects = projects + {'proctor system', 'smart door'} where employee_id=192;
+> 	Update Employee_Info set projects = projects + {'reverse pacman', 'smart door', 'BDF'} where employee_id=133;
+
+8.Create a TTL of 15 seconds to display the values of Employees.
+>	Insert into Employee_Info(employee_id, date_of_joining, dept_name, designstion, emp_name, salary, projects) VALUES(152, '2020-05-11', 'Backend', 'Associate Softare Developer', 'Abhilash', 65000, {'smart door', 'calender'}) USING TTL 15;
+> 	SELECT TTL (emp_name) from Employee_Info where employee_id=152;
