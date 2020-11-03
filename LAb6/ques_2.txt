@@ -1,0 +1,33 @@
+1.Create  a keyspace by name Library
+>	CREATE KEYSPACE Library with replication = {'class': 'SimpleStrategy', 'replication_factor': 1};
+
+2. Create a column family by name Library-Info with attributes 
+     Stud_Id Primary Key,
+     Counter_value of type Counter,
+    Stud_Name, Book-Name, Book-Id, Date_of_issue.
+>	CREATE COLUMNFAMILY Library_Info(
+        Stud_id int,
+        Counter_val counter,
+        Stud_name text,
+        Book_name text,
+        Book_id int,
+        Date_of_issue date,
+        primary key (Stud_id, Stud_name, Book_name, Book_id, Date_of_issue)
+    );
+
+3. Insert the values into the table in batch
+>	Update Library_Info set Counter_val = Counter_val + 1 where Stud_id=121 and Stud_name = 'Kedar' and Book_id=130 and Book_name='DSR' and date_of_issue='2020-09-19';
+> 	Update Library_Info set Counter_val = Counter_val + 1 where Stud_id=142 and Stud_name = 'Kratharth' and Book_id=134 and Book_name='Data Communications' and date_of_issue='2020-08-27';
+> 	Update Library_Info set Counter_val = Counter_val + 1 where Stud_id=111 and Stud_name = 'Krishna' and Book_id=100 and Book_name='BDA' and date_of_issue='2020-02-19';
+
+4.  Display the details of the table created and increase the value of the counter 
+>	Update Library_Info set Counter_val = Counter_val + 1 where Stud_id=121 and Stud_name = 'Kedar' and Book_id=130 and Book_name='DSR' and date_of_issue='2020-09-19';
+
+5. Write a query to show that a student with id 112 has taken a book “BDA” 2 times.
+>	select * from Library_Info where Stud_id=121 and Counter_val=3 ALLOW FILTERING;
+
+6. Export the created column to a csv file
+>	Copy Library_info(Stud_id, Stud_name, Book_name, Book_id, Date_of_issue, Counter_val) TO 'D:\BMSCE\sem7\BDA\BDA-1BM17CS042\LAb6\exported.csv';
+
+7. Import a given csv dataset from local file system into Cassandra column family
+>	COPY GOOGLE_APPS from 'D:\BMSCE\sem7\BDA\BDA-1BM17CS042\LAb6\googleplaystore.csv' WITH DELIMITER=',' AND HEADER=TRUE;
