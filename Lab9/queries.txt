@@ -1,0 +1,23 @@
+1. Create an external table named  with the following attributes
+ 	-> Empl_ID    ->Emp_Name    -> Designation    -> Salary
+> create external table if not exists ext_emp(emp_id int, emp_name string, designation string, salary float) row format delimited fields terminated by '\t' location '/employee';
+
+2. Load data into table from a given file
+> load data local inpath '/home/hp/Desktop/emp.txt' overwrite into table ext_emp;
+
+3. Create a view to Generate a query to retrieve the employee details who earn a salary of more than Rs 30000.
+> create view emp_view as select * from ext_emp where salary > 30000;
+
+4. Alter the table to add a column Dept_Id and Generate a query to retrieve the employee details in order by using Dept_Id.
+> alter table ext_emp add columns (dept_id int);
+> load data local inpath '/home/hp/Desktop/emp.txt' overwrite into table ext_emp;
+
+5. Generate a query to retrieve the number of employees in each department whose salary is greater than 30000.
+> select dept_id, count(dept_id) from ext_emp where salary > 30000 group by dept_id;
+
+6. Create another table Department with attributes
+	-> Dept_Id     ->Dept_name
+> create external table if not exists ext_dep(dept_id int, dept_name string) row format delimited fields terminated by '\t' location '/department';
+
+7. Display the cumulative details of each employee along with department details.
+> select * from ext_emp join ext_dep on ext_emp.dept_id = ext_dep.dept_id;
